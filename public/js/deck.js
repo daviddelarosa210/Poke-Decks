@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', function () {
   const app = {
     isAuthenticated: false,
@@ -36,51 +34,98 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const addLoginListeners = function () {
     const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', function (event) {
+    loginForm.addEventListener('submit', async function (event) {
       event.preventDefault();
-      //  logic for login
-      console.log('Login form submitted');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (response.ok) {
+          app.isAuthenticated = true;
+          app.currentView = 'mainApp';
+          renderView();
+        } else {
+          console.error('Login failed:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during login:', error);
+      }
     });
   };
 
   const addSignupListeners = function () {
     const signupForm = document.getElementById('signup-form');
-    signupForm.addEventListener('submit', function (event) {
+    signupForm.addEventListener('submit', async function (event) {
       event.preventDefault();
-      //  logic for signup
-      console.log('Signup form submitted');
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      try {
+        const response = await fetch('/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, password }),
+        });
+
+        if (response.ok) {
+          app.isAuthenticated = true;
+          app.currentView = 'mainApp';
+          renderView();
+        } else {
+          console.error('Signup failed:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during signup:', error);
+      }
     });
   };
 
   const addMainAppListeners = function () {
     const createDeckForm = document.getElementById('create-deck-form');
-    createDeckForm.addEventListener('submit', function (event) {
+    createDeckForm.addEventListener('submit', async function (event) {
       event.preventDefault();
-      //  logic for creating a deck
-      console.log('Create deck form submitted');
-    });
+      const deckName = document.getElementById('deck-name').value;
 
-    const logoutButton = document.getElementById('logout-button');
-    logoutButton.addEventListener('click', function () {
-      //  logic for logout
-      console.log('Logout button clicked');
+      try {
+        const response = await fetch('/create-deck', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name: deckName }),
+        });
+
+        if (response.ok) {
+          await fetchDecks();
+        } else {
+          console.error('Deck creation failed:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during deck creation:', error);
+      }
     });
   };
 
-  const checkAuthenticationStatus = function () {
-    // need function to check status and
-    // Return true if authenticated, false otherwise
-    return false;
+  //  fetchDecks implementation?
+  const fetchDecks = async function () {
+    console.log('Fetching decks...');
+    //  logic to fetch decks from the server
+    // Update decks array with  fetched data
   };
 
   const init = function () {
-    app.isAuthenticated = checkAuthenticationStatus();
-    if (app.isAuthenticated) {
-      app.currentView = 'mainApp';
-      // Fetch and update the user's decks
-      // Implement logic to fetch decks
-      // app.decks = ...???
-    }
+    // initialization logic?
     renderView();
   };
 
