@@ -120,9 +120,56 @@ document.addEventListener('DOMContentLoaded', function () {
   //  fetchDecks implementation?
   const fetchDecks = async function () {
     console.log('Fetching decks...');
+    try {
+      const response = await fetch('/decks', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          // Include any necessary authentication headers
+        },
+      });
+  
+      if (response.ok) {
+        const decks = await response.json();
+        app.decks = decks;
+        // Call a function to update the user interface with the fetched decks
+        updateDeckListUI();
+      } else {
+        console.error('Failed to fetch decks:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error during deck fetch:', error);
+    }
+  };
     //  logic to fetch decks from the server
     // Update decks array with  fetched data
-  };
+    const updateDeckListUI = function () {
+      const deckListContainer = document.getElementById('deck-list-container');
+      deckListContainer.innerHTML = ''; // Clear existing content
+  
+      if (app.decks.length === 0) {
+        // Display a message when there are no decks
+        const noDecksMessage = document.createElement('div');
+        noDecksMessage.textContent = 'You have no decks.';
+        deckListContainer.appendChild(noDecksMessage);
+      } else {
+        // Create elements for each deck and append them to the container
+        app.decks.forEach(deck => {
+          const deckElement = document.createElement('div');
+          deckElement.classList.add('deck-item'); // Added a class for styling
+  
+          // Deck Name
+          const deckName = document.createElement('h3');
+          deckName.textContent = deck.name;
+          deckElement.appendChild(deckName);
+  
+          // what other details or actions needed?
+  
+          // Append the deck element to the container
+          deckListContainer.appendChild(deckElement);
+        });
+      }
+    };
 
   const init = function () {
     // initialization logic?
