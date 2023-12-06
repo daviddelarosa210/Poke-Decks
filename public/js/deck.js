@@ -1,129 +1,88 @@
-const app = new Vue({
-  el: '#app',
-  data: {
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  const app = {
     isAuthenticated: false,
     currentView: 'login',
     decks: [],
     newDeckName: '',
-  },
-  methods: {
-    async fetchDecks() {
-      try {
-        const response = await fetch('/deck');
-        const data = await response.json();
-        this.decks = data;
-      } catch (error) {
-        console.error('Error fetching decks:', error);
-      }
-    },
-    async createDeck() {
-      try {
-        // Implement logic to create a new deck
+  };
 
-        // Fetch API to create a new deck
-        const response = await fetch('/create-deck', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            name: this.newDeckName,
-          }),
-        });
+  const templates = {
+    login: document.getElementById('login-template').innerHTML,
+    signup: document.getElementById('signup-template').innerHTML,
+    mainApp: document.getElementById('main-app-template').innerHTML,
+  };
 
-        if (response.ok) {
-          // After creating the deck, fetch and update the deck list
-          await this.fetchDecks();
-          this.newDeckName = ''; // Clear the input field
-        } else {
-          console.error('Error creating deck:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error creating deck:', error);
-      }
-    },
-    async login() {
-      try {
-        // Implement login logic
-
-        const response = await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            // Include login credentials
-          }),
-        });
-
-        if (response.ok) {
-          // After successful login, switch to the main application view
-          this.isAuthenticated = true;
-          this.currentView = 'main-app';
-          await this.fetchDecks();
-        } else {
-          console.error('Error logging in:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error logging in:', error);
-      }
-    },
-    async signup() {
-      try {
-        // Implement signup logic
-        // Example: Fetch API to create a new user account
-        const response = await fetch('/signup', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            // Include signup data
-          }),
-        });
-
-        if (response.ok) {
-          // After successful signup, switch to the main application view
-          this.isAuthenticated = true;
-          this.currentView = 'main-app';
-          await this.fetchDecks();
-        } else {
-          console.error('Error signing up:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error signing up:', error);
-      }
-    },
-    logout() {
-      // need to finishj fix logout function 
-
-
-      // Reset authentication status and switch to the login view
-      this.isAuthenticated = false;
-      this.currentView = 'login';
-    },
-  },
-  created() {
-    // Check the authentication status and set the initial view
-    this.isAuthenticated = this.checkAuthenticationStatus();
-    if (this.isAuthenticated) {
-      this.currentView = 'main-app';
-      this.fetchDecks();
+  const renderView = function () {
+    const appContainer = document.getElementById('app');
+    switch (app.currentView) {
+      case 'login':
+        appContainer.innerHTML = templates.login;
+        addLoginListeners();
+        break;
+      case 'signup':
+        appContainer.innerHTML = templates.signup;
+        addSignupListeners();
+        break;
+      case 'mainApp':
+        appContainer.innerHTML = templates.mainApp;
+        addMainAppListeners();
+        break;
+      default:
+        break;
     }
-  },
-  template: `
-    <div>
-      {{#if (eq currentView 'login')}}
-        {{> login-template 'HANDLEBARS ID FOR LOGIN login=login}}
-      {{/if}}
+  };
 
-      {{#if (eq currentView 'signup')}}
-        {{> Signup.handlebars signup=signup}}
-      {{/if}}
+  const addLoginListeners = function () {
+    const loginForm = document.getElementById('login-form');
+    loginForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      //  logic for login
+      console.log('Login form submitted');
+    });
+  };
 
-      {{#if (eq currentView 'main-app')}}
-        {{> main.handlebars decks=decks newDeckName=newDeckName createDeck=createDeck logout=logout}}
-      {{/if}}
-    </div>
-  `,
+  const addSignupListeners = function () {
+    const signupForm = document.getElementById('signup-form');
+    signupForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      //  logic for signup
+      console.log('Signup form submitted');
+    });
+  };
+
+  const addMainAppListeners = function () {
+    const createDeckForm = document.getElementById('create-deck-form');
+    createDeckForm.addEventListener('submit', function (event) {
+      event.preventDefault();
+      //  logic for creating a deck
+      console.log('Create deck form submitted');
+    });
+
+    const logoutButton = document.getElementById('logout-button');
+    logoutButton.addEventListener('click', function () {
+      //  logic for logout
+      console.log('Logout button clicked');
+    });
+  };
+
+  const checkAuthenticationStatus = function () {
+    // need function to check status and
+    // Return true if authenticated, false otherwise
+    return false;
+  };
+
+  const init = function () {
+    app.isAuthenticated = checkAuthenticationStatus();
+    if (app.isAuthenticated) {
+      app.currentView = 'mainApp';
+      // Fetch and update the user's decks
+      // Implement logic to fetch decks
+      // app.decks = ...???
+    }
+    renderView();
+  };
+
+  init();
 });
