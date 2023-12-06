@@ -7,9 +7,9 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   const templates = {
-    login: document.getElementById('login-template').innerHTML,
-    signup: document.getElementById('signup-template').innerHTML,
-    mainApp: document.getElementById('main-app-template').innerHTML,
+    login: document.getElementById('login-form').innerHTML,
+    signup: document.getElementById('signup-form').innerHTML,
+    mainApp: document.getElementById('main-app-form').innerHTML,
   };
 
   const renderView = function () {
@@ -23,12 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
         appContainer.innerHTML = templates.signup;
         addSignupListeners();
         break;
-      case 'mainApp':
-        appContainer.innerHTML = templates.mainApp;
-        addMainAppListeners();
-        break;
-      default:
-        break;
+        case 'mainApp':
+          appContainer.innerHTML = templates.mainApp;
+          addMainAppListeners();
+          fetchDecks(); // Fetch decks when transitioning to the main app view
+          break;
+        default:
+          break;
     }
   };
 
@@ -125,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Include any necessary authentication headers
+          // Include any necessary authentication 
         },
       });
   
