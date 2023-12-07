@@ -1,14 +1,18 @@
+
 const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
+const pokemon = require('pokemontcgsdk');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sequelize = require('./config/connections');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const apiKey = process.env.TCG_API_KEY;
 
 const sess = {
   secret: 'Super secret secret',
@@ -20,6 +24,15 @@ const sess = {
   }),
 };
 
+app.get('/api/cards', async (req, res) => {
+  try {
+    const cards = await pokemon.card.where({ pageSize: 10 });
+    res.json(cards);
+  } catch (error) {
+    console.error('Error fetching Pokémon cards:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 app.use(session(sess));
 
 const hbs = exphbs.create({ helpers });
