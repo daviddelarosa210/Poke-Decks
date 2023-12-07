@@ -1,10 +1,10 @@
 const router = require('express').Router();
 
-const userRoutes = require('./userroutes');
-const postRoutes = require('./post-routes');
-const commentRoutes = require('./comment-routes');
-const deckRoutes = require('./deck-routes'); // Add this line
-const pokemonRoutes = require('./pokemonroutes'); // Add this line
+const userRoutes = require('./api/userroutes')
+const postRoutes = require('./api/post-routes');
+const commentRoutes = require('./api/comment-routes');
+const deckRoutes = require('./api/deck-routes'); // Add this line
+const pokemonRoutes = require('./api/pokemonroutes'); // Add this line
 const dashboardRoutes = require('./dashboard-routes'); // Add this line
 
 router.use('/user', userRoutes);

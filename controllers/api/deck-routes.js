@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const { User, Deck, Card, DeckCard, UserDeck, Message } = require('../models');
+const { User, Deck, Card, DeckCard, UserDeck, Message } = require('../../models');
 
 // Create a new deck
 router.post('/decks', async (req, res) => {
@@ -72,3 +72,5 @@ router.delete('/decks/:deckId', async (req, res) => {
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
+module.exports = router;
