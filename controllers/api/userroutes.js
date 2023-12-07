@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../../models');
+const { User } = require('../../Models');
 const withAuth = require('../../utils/auth');
 
 // Route to create a new user

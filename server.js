@@ -5,6 +5,7 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 const pokemon = require('pokemontcgsdk');
+const homeRoutes = require('./controllers/home-routes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,6 +25,7 @@ const sess = {
   }),
 };
 
+
 app.get('/api/cards', async (req, res) => {
   try {
     const cards = await pokemon.card.where({ pageSize: 10 });
@@ -39,6 +41,7 @@ const hbs = exphbs.create({ helpers });
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

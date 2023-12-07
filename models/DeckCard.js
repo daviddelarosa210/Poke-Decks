@@ -1,9 +1,25 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connections');
 
-const DeckCard = sequelize.define('DeckCard', {
- //maybe deck type?
-// quantity of cards in the deck?
-});
+class DeckCard extends Model {}
+
+DeckCard.init(
+  {
+    // Add attributes as needed
+    // For example:
+    // deckType: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    // },
+    // quantity: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    // },
+  },
+  {
+    sequelize,
+    modelName: 'deck_card',
+  }
+);
 
 module.exports = DeckCard;

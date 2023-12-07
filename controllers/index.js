@@ -1,18 +1,11 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 
-const userRoutes = require('./api/userroutes')
-const postRoutes = require('./api/post-routes');
-const commentRoutes = require('./api/comment-routes');
-const deckRoutes = require('./api/deck-routes'); // Add this line
-const pokemonRoutes = require('./api/pokemonroutes'); // Add this line
-const dashboardRoutes = require('./dashboard-routes'); // Add this line
+const homeRoutes = require('./home-routes');
+const dashboardRoutes = require('./dashboard-routes');
+const apiRoutes = require('./api');
 
-router.use('/user', userRoutes);
-router.use('/post', postRoutes);
-router.use('/comment', commentRoutes);
-router.use('/deck', deckRoutes); // Add this line
-router.use('/pokemon', pokemonRoutes); // Add this line
-router.use('/dashboard', dashboardRoutes); // Add this line
+router.use('/', homeRoutes);
+router.use('/dashboard', dashboardRoutes);
+router.use('/api', apiRoutes);
 
 module.exports = router;
