@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Comment } = require('../../models'); 
+const { Comment } = require('../../Models'); 
 const withAuth = require('../../utils/auth');
 const { check, validationResult } = require('express-validator');
 

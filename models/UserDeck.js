@@ -1,13 +1,21 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connections');
 
-const UserDeck = sequelize.define('UserDeck', {
-  createdByUser: {
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
-  },
-  // what other attributes needed?
-});
+class UserDeck extends Model {}
 
-module.exports = UserDeck;
+UserDeck.init(
+  {
+    createdByUser: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    // Add other attributes as needed
+  },
+  {
+    sequelize,
+    modelName: 'user_deck',
+  }
+);
+
+module.exports = UserDeck

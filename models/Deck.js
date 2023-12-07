@@ -1,17 +1,25 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connections');
 
-const Deck = sequelize.define('Deck', {
-  id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
-    primaryKey: true,
+class Deck extends Model {}
+
+Deck.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-//  what other attributes specific to a deck?
-});
+  {
+    sequelize,
+    modelName: 'deck',
+  }
+);
 
 module.exports = Deck;

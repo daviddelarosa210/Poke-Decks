@@ -1,16 +1,25 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connections');
 
-const Message = sequelize.define('Message', {
-  id: {
-    type: DataTypes.INTEGER,
-    defaultValue: DataTypes.INTEGER,
-    primaryKey: true,
+class Message extends Model {}
+
+Message.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
   },
-  content: {
-    type: DataTypes.TEXT,
-    allowNull: false,
-  },
-});
+  {
+    sequelize,
+    modelName: 'message',
+  }
+);
 
 module.exports = Message;

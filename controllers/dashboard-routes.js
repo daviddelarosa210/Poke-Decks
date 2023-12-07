@@ -1,9 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const { Post } = require('../models'); 
+const router = require('express').Router();
+const sequelize = require('../config/connections');
+const { Post } = require('../Models');
 const withAuth = require('../utils/auth');
 
-// Route to display the dashboard for logged-in users
 router.get('/', withAuth, (req, res) => {
   Post.findAll({
     where: {
@@ -13,22 +12,20 @@ router.get('/', withAuth, (req, res) => {
   })
     .then((dbPostData) => {
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render('loggedIn-dashboard', { layout: 'dashboard', posts, loggedIn: true });
+      res.render('dashboard', { layout: 'dashboard', posts, loggedIn: true });
     })
     .catch((err) => {
-      console.error(err);
+      console.log(err);
       res.redirect('login');
     });
 });
 
-// Route to display the form for creating a new post
 router.get('/new', withAuth, (req, res) => {
   res.render('new-post', {
     layout: 'dashboard',
   });
 });
 
-// Route to display the form for editing a post by ID
 router.get('/edit/:id', withAuth, (req, res) => {
   Post.findByPk(req.params.id)
     .then((dbPostData) => {
@@ -45,7 +42,6 @@ router.get('/edit/:id', withAuth, (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
       res.status(500).json(err);
     });
 });
