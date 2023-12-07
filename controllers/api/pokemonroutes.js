@@ -5,3 +5,7 @@
 //Search cards
 //Search for one or many cards given a search query.
 //GET https://api.pokemontcg.io/v2/cards
+const express = require('express');
+const router = express.Router();
+
+module.exports = router;
