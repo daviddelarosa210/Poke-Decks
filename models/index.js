@@ -1,12 +1,12 @@
-const sequelize = require('../config/connection');
-const User = require('./User')(sequelize);
-const Deck = require('./Deck')(sequelize);
-const Card = require('./Card')(sequelize);
-const DeckCard = require('./DeckCard')(sequelize);
-const UserDeck = require('./UserDeck')(sequelize);
-const Message = require('./Message')(sequelize);
-const Comment = require('./Comments')(sequelize); 
-const Post = require('./Post')(sequelize); 
+const sequelize = require('../config/connections');
+const User = require('./User');
+const Deck = require('./Deck');
+const Card = require('./Card');
+const DeckCard = require('./DeckCard');
+const UserDeck = require('./UserDeck');
+const Message = require('./Message');
+const Comment = require('./Comments');
+const Post = require('./Post');
 
 // Associations to allow users to own decks, and cards within those decks 
 Deck.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
