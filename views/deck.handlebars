@@ -1,0 +1,18 @@
+<!-- views/decks.handlebars -->
+
+{{#each decks}}
+  <div class="deck-item">
+    <h3>{{name}}</h3>
+    <ul>
+      {{#each cards}}
+        <li>{{name}} - {{type}}</li>
+      {{/each}}
+    </ul>
+  </div>
+{{/each}}
+
+{{#unless decks.length}}
+  <div>No decks available.</div>
+{{/unless}}
+
+<script src="/public/js/deck.js"></script>
