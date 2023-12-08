@@ -144,31 +144,63 @@ document.addEventListener('DOMContentLoaded', function () {
   };
     //  logic to fetch decks from the server
     // Update decks array with  fetched data
-    const updateDeckListUI = function () {
+    const updateDeckListUI = async function () {
       const deckListContainer = document.getElementById('deck-list-container');
       deckListContainer.innerHTML = ''; // Clear existing content
-  
+    
       if (app.decks.length === 0) {
         // Display a message when there are no decks
         const noDecksMessage = document.createElement('div');
         noDecksMessage.textContent = 'You have no decks.';
         deckListContainer.appendChild(noDecksMessage);
       } else {
-        // Create elements for each deck and append them to the container
-        app.decks.forEach(deck => {
+        // Iterate through each deck and fetch/display cards
+        for (const deck of app.decks) {
           const deckElement = document.createElement('div');
           deckElement.classList.add('deck-item'); // Added a class for styling
-  
+    
           // Deck Name
           const deckName = document.createElement('h3');
           deckName.textContent = deck.name;
           deckElement.appendChild(deckName);
-  
-          // what other details or actions needed?
-  
+    
+          // Fetch and display Pokémon cards for the deck
+          await fetchAndDisplayCards(deck.id, deckElement);
+    
           // Append the deck element to the container
           deckListContainer.appendChild(deckElement);
+        }
+      }
+    };
+    
+    // Fetch and display Pokémon cards for a specific deck
+    const fetchAndDisplayCards = async function (deckId, deckElement) {
+      try {
+        const response = await fetch(`/decks/${deckId}/cards`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            // Include any necessary authentication headers
+          },
         });
+    
+        if (response.ok) {
+          const cards = await response.json();
+    
+          // Create elements for each card and append them to the deck element
+          const cardList = document.createElement('ul');
+          cards.forEach(card => {
+            const cardItem = document.createElement('li');
+            cardItem.textContent = `${card.name} - ${card.type}`;
+            cardList.appendChild(cardItem);
+          });
+    
+          deckElement.appendChild(cardList);
+        } else {
+          console.error('Failed to fetch cards for the deck:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error during card fetch:', error);
       }
     };
 

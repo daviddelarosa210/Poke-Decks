@@ -73,4 +73,26 @@ router.delete('/decks/:deckId', async (req, res) => {
   }
 });
 
+// Get cards for a specific deck by ID
+router.get('/decks/:deckId/cards', async (req, res) => {
+  const deckId = req.params.deckId;
+  try {
+    // Find the deck by ID and include associated cards
+    const deckWithCards = await Deck.findByPk(deckId, {
+      include: [{ model: Card, through: DeckCard }],
+    });
+
+    if (!deckWithCards) {
+      res.status(404).json({ error: 'Deck not found' });
+    } else {
+      const cards = deckWithCards.Cards.map(card => card.get({ plain: true }));
+      res.status(200).json(cards);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = router;

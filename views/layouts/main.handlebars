@@ -6,34 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pokedecks</title>
 
-  <link rel="stylesheet" href="/public/css/style.css">
-</head>e.cs
+  <link rel="stylesheet" href="/public/css/styles.css">
+<header class='header bg-yellow-500 p-4'>
+  <h1 class='main-board text-4xl font-bold text-red-700'>
+    <a href='/deck'>The Pokécenter</a>
+  </h1>
+</header>
 
-<body>
-  <header>
-    <h1>Pokedecks</h1>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/dashboard">Dashboard</a></li>
-        {{#if loggedIn}}
-          <li><a href="/logout">Logout</a></li>
-        {{else}}
-          <li><a href="/login">Login</a></li>
-          <li><a href="/signup">Signup</a></li>
-        {{/if}}
-      </ul>
-    </nav>
-  </header>
+<nav class='navbar bg-blue-500'>
+  <ul class='flex-row'>
+    <li class='nav-li'><a href='/' class='text-white'>Home</a></li>
+    <li class='nav-li'><a href='/dashboard' class='text-white'>Dashboard</a></li>
+    <li class='nav-li'><a href='#' id='logout' class='text-white'>Logout</a></li>
+  </ul>
+</nav>
 
   <main>
     {{{body}}}
   </main>
 
   <footer>
-    <a href='/new-post'>Post it!</a>
+    <a href='/new-post'>Catch 'em!</a>
   </footer>
-
+<footer class='footer bg-red-500 p-4'></footer>
   <!-- JavaScript file  -->
 
 </body>
