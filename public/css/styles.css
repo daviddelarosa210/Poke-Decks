@@ -4,71 +4,70 @@
 @import 'tailwindcss/utilities';
 /* Global styles */
 body {
-  font-family: 'Pokemon Solid', cursive;
-  background-color: #f4f4f4;
+  font-family: 'Pokemon Solid', sans-serif;
+  background-color: #fafafa;
+  margin: 0;
+  padding: 0;
 }
 
-.container {
+.navbar {
+  background-color: #3949ab;
+}
+
+.nav-li {
+  margin-right: 1rem;
+}
+
+.nav-li a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.nav-li a:hover {
+  background-color: #ffcb05;
+}
+
+.header {
+  background-color: #ffcb05;
+  padding: 1rem;
+  text-align: center;
+}
+
+.main-board a {
+  color: #d32f2f;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.main-board a:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  background-color: #d32f2f;
+  padding: 1rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+.main {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Header styles */
-.header {
-  background-color: #ffcc00;
-  color: #333;
-  padding: 1rem;
-}
-
-/* Main content styles */
-.main-content {
-  padding: 2rem;
-}
-
-/* Deck list styles */
-.deck-list-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
 .deck-item {
-  border: 1px solid #ffd700;
-  padding: 1rem;
-  border-radius: 4px;
-  background-color: #fff;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-/* Form styles */
-.form-container {
-  max-width: 400px;
-  margin: 0 auto;
-}
-
-.form-input {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-/* Button styles */
-.btn {
-  background-color: #ffcc00;
-  color: #333;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btn:hover {
-  background-color: #ffd700;
-}
-
-/* Footer styles */
-.footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-  text-align: center;
+.deck-item:hover {
+  transform: scale(1.02);
 }
