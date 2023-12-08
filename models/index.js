@@ -19,7 +19,7 @@ Deck.belongsToMany(Card, { through: 'DeckCard' });
 // Associations for comments and posts
 Comment.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
 Comment.belongsTo(Post, { foreignKey: 'postId', onDelete: 'CASCADE' });
-Post.belongsTo(User, { foreignKey: 'userId', onDelete: 'CASCADE' });
+Post.belongsTo(User, { foreignKey: 'user_id', onDelete: 'CASCADE' });
 Post.hasMany(Comment, { foreignKey: 'postId' });
 
 // Associations to allow messages between users

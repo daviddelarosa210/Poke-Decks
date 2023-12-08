@@ -9,14 +9,14 @@ router.get('/', (req, res) => {
     include: [
       {
         model: User,
-        attributes: ['username'],
+        attributes: ['name'],
       },
     ],
   })
     .then((dbPostData) => {
       
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render('all-posts', {
+      res.render('dashboard', {
         posts,
         loggedIn: req.session.loggedIn,
       });
