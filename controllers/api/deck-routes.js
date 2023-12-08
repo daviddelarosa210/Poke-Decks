@@ -4,7 +4,7 @@ const router = express.Router();
 const { User, Deck, Card, DeckCard, UserDeck, Message } = require('../../Models');
 
 // Create a new deck
-router.post('/decks', async (req, res) => {
+router.post('/deck', async (req, res) => {
   try {
     const newDeck = await Deck.create(req.body);
     res.status(201).json(newDeck);
@@ -15,7 +15,7 @@ router.post('/decks', async (req, res) => {
 });
 
 // Get all decks
-router.get('/decks', async (req, res) => {
+router.get('/deck', async (req, res) => {
   try {
     const decks = await Deck.findAll();
     res.status(200).json(decks);
@@ -26,7 +26,7 @@ router.get('/decks', async (req, res) => {
 });
 
 // Get a specific deck by ID
-router.get('/decks/:deckId', async (req, res) => {
+router.get('/deck/:deckId', async (req, res) => {
   const deckId = req.params.deckId;
   try {
     const deck = await Deck.findByPk(deckId);
@@ -42,7 +42,7 @@ router.get('/decks/:deckId', async (req, res) => {
 });
 
 // Update a deck by ID
-router.put('/decks/:deckId', async (req, res) => {
+router.put('/deck/:deckId', async (req, res) => {
   const deckId = req.params.deckId;
   try {
     const [updatedRows] = await Deck.update(req.body, { where: { id: deckId } });
@@ -58,7 +58,7 @@ router.put('/decks/:deckId', async (req, res) => {
 });
 
 // Delete a deck by ID
-router.delete('/decks/:deckId', async (req, res) => {
+router.delete('/deck/:deckId', async (req, res) => {
   const deckId = req.params.deckId;
   try {
     const deletedRows = await Deck.destroy({ where: { id: deckId } });
@@ -74,7 +74,7 @@ router.delete('/decks/:deckId', async (req, res) => {
 });
 
 // Get cards for a specific deck by ID
-router.get('/decks/:deckId/cards', async (req, res) => {
+router.get('/deck/:deckId/cards', async (req, res) => {
   const deckId = req.params.deckId;
   try {
     // Find the deck by ID and include associated cards
