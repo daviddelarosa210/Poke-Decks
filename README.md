@@ -17,6 +17,10 @@
 
 Poke-Decks is a beta fullstack site that invites fellow Pokemon enthusiasts to share, trade, and sell their valuable Pokemon trading cards using the following javacript program with databases: express.js, mysql2, sequelize, node.js, express-session-sequelize, and handlebars.
 
+![Alt text](/assets/Intro.png)
+![Alt text](/assets/User%20Sign%20Up.png)
+![Alt text](/assets/TCG%20API.png)
+
 ## Installation
 
 Execute npm install to download the required dependenices: [dotenv](https://www.npmjs.com/package/dotenv), [express](https://www.npmjs.com/package/express), [mysql2](https://www.npmjs.com/package/mysql2), [sequelize](https://www.npmjs.com/package/sequelize).
