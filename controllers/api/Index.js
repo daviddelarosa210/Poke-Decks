@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const commentRoutes = require('./comment-routes');
 const deckRoutes = require('./deck-routes'); // Add this line
-const postRoutes = require('./post-routes');
+const postRoutes = require('./Post-routes');
 const userRoutes = require('./userroutes')
 const pokemonRoutes = require('./pokemonroutes'); // Add this line
 
